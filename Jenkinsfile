@@ -35,11 +35,6 @@ pipeline {
                 }
             }
         }
-        stage("Quality Gate Check") {
-            steps {
-                waitForQualityGate abortPipeline: false
-            }
-        }
         stage("Deploy") {
             steps {
                 echo 'deploy to production'
