@@ -30,7 +30,7 @@ pipeline {
                 // Run Maven on a Unix agent.
                 withSonarQubeEnv('sonarqube-immune') {
                     catchError {
-                        sh "mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN -Dsonar.qualitygate.wait=true"
+                        sh "mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN"
                     }
                 }
             }
