@@ -2,11 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/OWASP/OWASP-WebScarab.git'
-            }
-        }
         stage('Build') {
             steps {
                 sh "mvn clean install -DskipTests"
@@ -42,7 +37,7 @@ pipeline {
         }
         stage("Quality Gate Check") {
             steps {
-                waitForQualityGate abortPipeline: true
+                waitForQualityGate abortPipeline: false
             }
         }
         stage("Deploy") {
