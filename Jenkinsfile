@@ -20,15 +20,13 @@ pipeline {
         }
         stage('Dependency Track Upload') {
             steps {
-                // Run Maven on a Unix agent.
                 sh "mvn org.cyclonedx:cyclonedx-maven-plugin:makeAggregateBom"
                 sh "mvn io.github.pmckeown:dependency-track-maven-plugin:upload-bom -Ddependency-track.dependencyTrackBaseUrl=http://localhost:8081 -Ddependency-track.apiKey=E2M62M9kJN4tkaUphey4UWSp31p30aky"
             }
         }
         stage('Code Quality and Security Analysis') {
             steps {
-                // Run Maven on a Unix agent.
-                withSonarQubeEnv('sonarqube-immune') {
+                withSonarQubeEnv('sonar-playground') {
                     catchError {
                         sh "mvn sonar:sonar -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.login=$SONAR_AUTH_TOKEN"
                     }
